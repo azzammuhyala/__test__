@@ -18,22 +18,38 @@ def start():
     t.penup()
 
 def boom():
-    t.pencolor('red')
-    # 2 method ini penting biar penyebaran percikannya natural
-    t.tracer(0)
-    t.speed(0)
     n = 30
-    for i in range(1, 16):
-        for j in range(n):
-            t.penup()
-            # titik awal percikan
-            t.goto(0, 100)
+    l = []
 
-            t.setheading(360/n * j)
-            t.pendown()
-            t.forward(i * 10)
-        tm.sleep(0.016) # kasih delay biar keliatan animasinya (60 FPS)
-        t.update()      # perbarui kanva
+    screen = t.Screen()
+    screen.delay(0)
+
+    for i in range(n):
+        p = t.Turtle()
+        p.penup()
+        p.hideturtle()
+        p.speed(0)
+        p.pensize(3)
+        p.pencolor('red')
+        p.setheading(360/n * i)
+        # ke tengah percikan
+        p.goto(0, 100)
+        p.pendown()
+        # idk
+        l.append(p)
+
+    # cara 1:
+    for i in range(10):
+        for p in l:
+            p.forward(10)
+
+    # cara 2:
+    # with screen.no_animation():
+    #     for i in range(30):
+    #         for p in l:
+    #             p.forward(5)
+    #         tm.sleep(0.016)
+    #         screen.update()
 
 start()
 boom()
